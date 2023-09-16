@@ -6,27 +6,24 @@
 	let loading = false; // To show a loading spinner or message while fetching
 	let error = null; // To display any error messages
 
-	const apiKey = "486637eb38aad5e7e85b1d3eaca91166";
 
 	async function fetchWeather() {
 		loading = true;
 		error = null;
 		try {
-			const response = await fetch(
-				`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-			);
+			// Fetching data from your own server now, not directly from OpenWeatherMap
+			const response = await fetch(`http://localhost:3001/weather?city=${city}`);
 			if (!response.ok) {
-				throw new Error("Failed to fetch weather data");
+				throw new Error('Failed to fetch weather data');
 			}
 			weatherData = await response.json();
-			window.localStorage.setItem("weatherData", JSON.stringify(weatherData));
-			console.log(weatherData);
 		} catch (e) {
 			error = e.message;
 		} finally {
 			loading = false;
 		}
-	}
+}
+
 
 	// Theme toggling
 	let darkTheme = false;
