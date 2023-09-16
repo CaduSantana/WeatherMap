@@ -1,4 +1,6 @@
 <script>
+    import { fade } from 'svelte/transition';
+
 	export let weather;
 
 	let tempCelsius = weather.main.temp;
@@ -9,7 +11,7 @@
 	let icon = `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
 </script>
 
-<div class="weather-card">
+<div class="weather-card" in:fade>
 	<h2>{weather.name}</h2>
 	<img class="weather-icon" src={icon} alt={description} />
 	<p class="temperature">{tempCelsius.toFixed(2)}°C</p>
